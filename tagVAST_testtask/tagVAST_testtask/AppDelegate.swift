@@ -7,16 +7,27 @@
 
 import UIKit
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var services: Services!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        initServices()
+        
         return true
     }
 
+    
+    func initServices() {
+        services = Services()
+        services.append(proto: ConfigService.self,
+                        implementation: ConfigImpl(services: services))
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

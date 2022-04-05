@@ -9,9 +9,13 @@ import XCTest
 @testable import tagVAST_testtask
 
 class tagVAST_testtaskTests: XCTestCase {
+    
+    private var services: Services!
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        services = Services()
+        services.append(proto: ConfigService.self, implementation: ConfigImpl(services: services))
     }
 
     override func tearDownWithError() throws {
@@ -30,6 +34,15 @@ class tagVAST_testtaskTests: XCTestCase {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
+        }
+    }
+    
+    func testConfig() throws {
+        if let s = services.resolve(proto: ConfigService.self) as? ConfigService {
+            XCTAssert(!s.pixabayKey.isEmpty, "pixabay config key is empty")
+            print(s.pixabayKey)
+        } else {
+            XCTFail("Can't resolve Config dependancy")
         }
     }
 

@@ -16,6 +16,9 @@
 		9C354CF927FC052C0083BE73 /* tagVAST_testtaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C354CF827FC052C0083BE73 /* tagVAST_testtaskTests.swift */; };
 		9C354D0327FC052C0083BE73 /* tagVAST_testtaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C354D0227FC052C0083BE73 /* tagVAST_testtaskUITests.swift */; };
 		9C354D0527FC052C0083BE73 /* tagVAST_testtaskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C354D0427FC052C0083BE73 /* tagVAST_testtaskUITestsLaunchTests.swift */; };
+		9C354D1327FC2DF70083BE73 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C354D1227FC2DF70083BE73 /* Services.swift */; };
+		9C354D1527FC336E0083BE73 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C354D1427FC336E0083BE73 /* Config.swift */; };
+		9C354D1727FC437E0083BE73 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C354D1627FC437E0083BE73 /* Provider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		9C354CFE27FC052C0083BE73 /* tagVAST_testtaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tagVAST_testtaskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C354D0227FC052C0083BE73 /* tagVAST_testtaskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tagVAST_testtaskUITests.swift; sourceTree = "<group>"; };
 		9C354D0427FC052C0083BE73 /* tagVAST_testtaskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tagVAST_testtaskUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9C354D1227FC2DF70083BE73 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		9C354D1427FC336E0083BE73 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		9C354D1627FC437E0083BE73 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		9C354CE027FC05290083BE73 /* tagVAST_testtask */ = {
 			isa = PBXGroup;
 			children = (
+				9C354D1127FC2DBF0083BE73 /* Services */,
 				9C354CE127FC05290083BE73 /* AppDelegate.swift */,
 				9C354CE327FC05290083BE73 /* SceneDelegate.swift */,
 				9C354CE527FC05290083BE73 /* ViewController.swift */,
@@ -125,6 +132,16 @@
 				9C354D0427FC052C0083BE73 /* tagVAST_testtaskUITestsLaunchTests.swift */,
 			);
 			path = tagVAST_testtaskUITests;
+			sourceTree = "<group>";
+		};
+		9C354D1127FC2DBF0083BE73 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9C354D1227FC2DF70083BE73 /* Services.swift */,
+				9C354D1427FC336E0083BE73 /* Config.swift */,
+				9C354D1627FC437E0083BE73 /* Provider.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +276,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C354CE627FC05290083BE73 /* ViewController.swift in Sources */,
+				9C354D1727FC437E0083BE73 /* Provider.swift in Sources */,
+				9C354D1327FC2DF70083BE73 /* Services.swift in Sources */,
+				9C354D1527FC336E0083BE73 /* Config.swift in Sources */,
 				9C354CE227FC05290083BE73 /* AppDelegate.swift in Sources */,
 				9C354CE427FC05290083BE73 /* SceneDelegate.swift in Sources */,
 			);
