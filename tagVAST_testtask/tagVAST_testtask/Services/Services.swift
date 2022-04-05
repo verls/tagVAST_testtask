@@ -15,13 +15,13 @@ protocol Service: AnyObject {
 class Services {
     private var services: [String:Service] = [:]
     
-    func append<P>(proto:P.Type, implementation: Service) -> Void {
+    func append<P>(_ proto:P.Type, implementation: Service) -> Void {
         let key = keyFor(aProto: proto.self)
         services[key] = implementation
         implementation.services = self
     }
     
-    func resolve<P>(proto:P.Type) -> Service? {
+    func resolve<P>(_ proto:P.Type) -> Service? {
         let key = keyFor(aProto: proto.self)
         return services[key]
     }
@@ -30,3 +30,4 @@ class Services {
         return ("\(aProto)")
     }
 }
+

@@ -44,12 +44,27 @@ final class DownloaderImpl: DownloaderService {
     func  loadData(with remote: URL, completion: @escaping (Result<Data?, Error>) -> Void) {
         let req = URLRequest(url: remote)
         let downloadTask = session.downloadTask(with: req) { url, response, error in
-            print("Obtaining \(url!.lastPathComponent) complete")
-            if let response = response, let url = url,
-               self.cache.cachedResponse(for: req) == nil,
-               let data = try? Data(contentsOf: url) {
-                self.cache.storeCachedResponse(CachedURLResponse(response: response, data: data), for: req)
+            guard error == nil else {
+                print("Obtaining failed with: \(error!.localizedDescription)")
+                completion(.failure(error!) )
+                return
             }
+
+            print("Obtaining \(url!.lastPathComponent) complete")
+            
+            var resultData: Data?
+            if let url = url {
+                resultData = try? Data(contentsOf: url)
+            }
+            
+            if let response = response,
+               self.cache.cachedResponse(for: req) == nil,
+               let data = resultData {
+                    self.cache.storeCachedResponse(CachedURLResponse(response: response, data: data), for: req)
+                    resultData = data
+            }
+            
+            completion(.success(resultData))
         }
         
         downloadTask.resume()

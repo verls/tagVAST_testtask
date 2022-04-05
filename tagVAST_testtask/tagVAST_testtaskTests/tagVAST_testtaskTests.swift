@@ -15,7 +15,9 @@ class tagVAST_testtaskTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         services = Services()
-        services.append(proto: ConfigService.self, implementation: ConfigImpl(services: services))
+        services.append(ConfigService.self,implementation: ConfigImpl(services: services))
+        services.append(DownloaderService.self, implementation: DownloaderImpl(services: services))
+        services.append(ProviderService.self, implementation: PixabayProvider(services: services))
     }
 
     override func tearDownWithError() throws {
@@ -38,12 +40,53 @@ class tagVAST_testtaskTests: XCTestCase {
     }
     
     func testConfig() throws {
-        if let s = services.resolve(proto: ConfigService.self) as? ConfigService {
-            XCTAssert(!s.pixabayKey.isEmpty, "pixabay config key is empty")
-            print(s.pixabayKey)
+        if let config = services.resolve(ConfigService.self) as? ConfigService {
+            XCTAssert(!config.pixabayKey.isEmpty, "pixabay config key is empty")
+            print(config.pixabayKey)
         } else {
             XCTFail("Can't resolve Config dependancy")
         }
     }
 
+    func testDownloader() throws {
+        if let loader = services.resolve(DownloaderService.self) as? DownloaderService {
+            let expectation = XCTestExpectation(description: "Loading a file asynchronously.")
+            let url = URL(string: "https://player.vimeo.com/external/328940142.hd.mp4?s=1ea57040d1487a6c9d9ca9ca65763c8972e66bd4&profile_id=175")!
+            loader.loadData(with: url) { res in
+                switch res {
+                case .success(let data):
+                    XCTAssertNotNil(data)
+                    XCTAssert(data!.count > 0, "data should have bytes")
+                    print("bytes: \(data!.count)")
+                case .failure(let err):
+                    XCTFail("Failed loading: \(err.localizedDescription)")
+                }
+                expectation.fulfill()
+            }
+            wait(for: [expectation], timeout: 10.0)
+        } else {
+            XCTFail("Can't resolve downloader dependancy")
+        }
+    }
+    
+    func testProvider() throws {
+        if let provider = services.resolve(ProviderService.self) as? ProviderService {
+            let expectation = XCTestExpectation(description: "Making searh a file asynchronously.")
+            
+            provider.search(term: "yellow flowers") { res in
+                switch res {
+                case .failure(let err): XCTFail("Search failed: \(err.localizedDescription)")
+                case .success(let results):
+                    XCTAssertFalse(results.isEmpty, "empty results")
+                    expectation.fulfill()
+                }
+            }
+            
+            
+        
+            wait(for: [expectation], timeout: 10.0)
+        } else {
+            XCTFail("Can't resolve downloader dependancy")
+        }
+    }
 }
