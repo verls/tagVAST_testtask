@@ -44,7 +44,7 @@ class PixabayProvider: ProviderService {
     }
     
     func nextItems(for term: String, needed count: Int, completion: @escaping (Result<[ProviderSearchResult], Error>) -> Void) {
-        <#code#>
+        
     }
     
     

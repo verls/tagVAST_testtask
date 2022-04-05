@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         services = Services()
         services.append(proto: ConfigService.self,
                         implementation: ConfigImpl(services: services))
+        services.append(proto: DownloaderService.self, implementation: DownloaderImpl(services: services))
+        services.append(proto: ProviderService.self, implementation: PixabayProvider(services: services))
     }
     
     // MARK: UISceneSession Lifecycle
