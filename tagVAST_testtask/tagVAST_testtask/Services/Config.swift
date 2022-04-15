@@ -21,7 +21,7 @@ final class ConfigImpl: ConfigService {
     
     
     // TODO: use code generation here
-    let pixabayKey: String = "26529056-1581cefcd5ee5b7fbd4c79be4"
+    let pixabayKey: String = "26529056-1581cefcd5ee5b7fbd4c79be4e2"
     
     init(services: Services) {
         self._services = services
